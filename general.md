@@ -7,4 +7,8 @@
 - 
 
 
-# Thoughts
+# To Do
+- Create a python script for general cleaning of the data(get it to the point as shown in other repo)
+- upload the historical cleaned data as a CSV
+- generate SQL qeuries to populate tables with cleaned data 
+- Implement the API to update the Crash dataset periodically 
