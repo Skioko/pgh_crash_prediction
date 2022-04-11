@@ -1,0 +1,48 @@
+version: '2'
+services:
+ web-server:
+   image: php:7.4.3-apache
+   volumes:
+      - "./html/:/var/www/html/"
+   ports:
+      - "8080:80"
+
+ mysql-odb-server:
+  image: mysql:8.0.19
+  environment:
+     MYSQL_ROOT_PASSWORD: secret
+  volumes:
+     - mysql-data:/var/lib/mysql_odb
+  ports:
+     - "13306:3306"
+     
+ mysql-dw-server:
+  image: mysql:8.0.19
+  environment:
+     MYSQL_ROOT_PASSWORD: secret
+  volumes:
+     - mysql-data:/var/lib/mysql_dw
+  ports:
+     - "23306:3306"
+
+ phpmyadmin-odb:
+  image: phpmyadmin/phpmyadmin:5.0.1
+  environment:
+     PMA_HOST: mysql-odb-server
+     PMA_USER: root
+     PMA_PASSWORD: secret
+  ports:
+      - "15000:80"
+      
+ phpmyadmin-dw:
+  image: phpmyadmin/phpmyadmin:5.0.1
+  environment:
+     PMA_HOST: mysql-dw-server
+     PMA_USER: root
+     PMA_PASSWORD: secret
+  ports:
+      - "25000:80"
+
+volumes:
+  mysql-data:
+
